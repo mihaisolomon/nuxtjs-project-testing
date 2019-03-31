@@ -5,6 +5,19 @@
         <div class="card">
           <div class="card-header">Login</div>
           <div class="card-body">
+
+            <b-alert show v-if="$auth.$state.redirect">
+              You have to login before accessing to <strong>{{ $auth.$state.redirect }}</strong>
+            </b-alert>
+
+            <b-alert v-if="error" show variant="danger">
+              <ul>
+                <template v-for="err in error">
+                  <li>{{ err }}</li>
+                </template>
+              </ul>
+            </b-alert>
+
             <form @submit.prevent="loginUser">
               <div class="form-group row">
                 <label for="email" class="col-sm-4 col-form-label text-md-right">Email</label>
@@ -43,8 +56,12 @@
 
 <script>
   export default {
+
+    middleware: ['auth'],
+
     data() {
       return {
+        error: null,
         userForm: {
           email: '',
           password: ''
@@ -55,12 +72,27 @@
       async loginUser() {
         await this.$auth.login({
           data: this.userForm
-        });
-        this.$router.push({
-          path: '/'
+        }).then((response) => {
+
+          this.$router.push({
+            path: '/'
+          });
+
+        }).catch(e => {
+          this.error = e.response.data;
         });
       }
-    }
+    },
+    computed: {
+      redirect() {
+        return (
+          this.$route.query.redirect && decodeURIComponent(this.$route.query.redirect)
+        )
+      },
+      isCallback() {
+        return Boolean(this.$route.query.callback)
+      }
+    },
   }
 </script>
 

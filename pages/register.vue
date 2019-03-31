@@ -98,11 +98,8 @@
                 password: this.userForm.password
               }
             }).catch(e => {
-
-              console.log(e);
-
               this.error = e + ''
-            })
+            });
             this.$router.push({
               path: '/'
             });
@@ -110,7 +107,6 @@
           .catch(e => {
             this.error = e.response.data;
           });
-
       }
     }
   }
