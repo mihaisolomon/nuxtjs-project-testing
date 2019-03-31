@@ -57,7 +57,7 @@
 <script>
   export default {
 
-    middleware: ['auth'],
+    // middleware: ['auth'],
 
     data() {
       return {
@@ -70,7 +70,7 @@
     },
     methods: {
       async loginUser() {
-        await this.$auth.login({
+        await this.$auth.loginWith('local', {
           data: this.userForm
         }).then((response) => {
 
@@ -93,6 +93,9 @@
         return Boolean(this.$route.query.callback)
       }
     },
+    mounted() {
+      console.log(this.$auth.$state);
+    }
   }
 </script>
 

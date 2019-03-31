@@ -64,10 +64,12 @@ export default {
       local: {
         endpoints: {
           login: { url: 'login', propertyName: 'token.accessToken' },
-          user: { url: 'me', method: 'get', propertyName: 'data' },
+          user: { url: 'me', method: 'get', propertyName: 'user' },
           logout: false
-        }
-      }
+        },
+        // tokenRequired: true,
+      },
+
     }
   }
 }

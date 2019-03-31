@@ -4,7 +4,13 @@
       <div class="card">
         <div class="card-header">Login</div>
         <div class="card-body">
-          <logo></logo>
+          {{ state }}
+        </div>
+        <div class="card-footer">
+          <b-btn-group>
+            <b-button @click="$auth.fetchUser()">Fetch User</b-button>
+            <b-button @click="$auth.logout()">Logout</b-button>
+          </b-btn-group>
         </div>
       </div>
     </div>
@@ -17,6 +23,11 @@
     middleware:['auth'],
     components: {
       Logo
+    },
+    computed: {
+      state() {
+        return JSON.stringify(this.$auth.$state, undefined, 2)
+      }
     }
   }
 </script>
