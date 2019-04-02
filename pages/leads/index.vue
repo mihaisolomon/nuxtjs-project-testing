@@ -6,7 +6,7 @@
       </b-btn>
       <b-table striped hover :items="list" :fields="fields">
         <template slot="name" slot-scope="data">
-          <b-link :to="`/cars/${data.item.id}/edit`">{{data.item.name}}</b-link>
+          <b-link :to="`/leads/${data.item.id}/edit`">{{data.item.name}}</b-link>
         </template>
         <template slot="members" slot-scope="data">
           {{data.item.users.length}}

@@ -1,5 +1,7 @@
 import pkg from './package'
 
+const i18n = require('./config/locales');
+
 export default {
   mode: 'spa',
 
@@ -42,7 +44,8 @@ export default {
     // Doc: https://bootstrap-vue.js.org/docs/
     'bootstrap-vue/nuxt',
     '@nuxtjs/axios',
-    '@nuxtjs/auth'
+    '@nuxtjs/auth',
+    ['nuxt-i18n', i18n],
   ],
 
   axios: {
